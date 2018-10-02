@@ -4,18 +4,31 @@
 
 
 {% block main %}
-<p>Olá {{ user.username }}</p>
-<a href="{% url 'logout' %}">Sair</a><br><br><br><br>
-<ul>
+
+<div class="row">
+  <div class="col">
+
+  </div>
+  <div class="col-6">
+    <ul class="list-group">
     {% for person in persons %}
-    <li>
+    <li class="list-group-item">
         <a>{{ person.first_name }} {{ person.last_name }}</a>
-        <a href="{% url 'person_update' person.id %}">Atualizar</a>
-        <a href="{% url 'person_delete' person.id %}" class="btn btn-danger">Deletar</a>
+      <a href="{% url 'person_update' person.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a href="{% url 'person_delete' person.id %}"><span class="glyphicon glyphicon-trash"></span></a>
     </li>
     {% endfor %}
-</ul>
-<a href="{% url 'person_new' %}" class="btn btn-primary">Adicionar novo cliente</a>
+    </ul>
+    <a href="{% url 'person_new' %}" class="btn btn-primary">Adicionar novo cliente</a>
+  </div>
+  <div class="col">
+    {% if user.is_authenticated %}
+      <p>Olá, <b>{{ user.username }}</b>
+      <a href="{% url 'logout' %}" class="btn btn-info">Sair</a></p>
+    {% endif %}
+  </div>
+</div>
+
 <br><br><br><br>
 
 <!DOCTYPE html>
