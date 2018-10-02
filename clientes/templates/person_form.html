@@ -1,20 +1,14 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load bootstrap %}
 
-    <h1>FICHA DO CLIENTE</h1>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Salvar</button>
-    </form>
+{% block title %} Administração {% endblock %}
 
-</body>
-</html>
+{% block main %}
+<h1>FICHA DO CLIENTE</h1><br>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|bootstrap }}
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+
+{% endblock %}

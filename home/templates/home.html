@@ -3,11 +3,25 @@
 {% block title %} Home-Page {% endblock %}
 
 {% block main %}
-    <h1>Seja Bem Vindo!</h1>
-    {% if user.is_authenticated %}
-        <p>Olá {{ user.username }}</p>
-        <a href="{% url 'logout' %}">SAIR</a>
-    {% else %}
-        <a href="{% url 'login' %}">ENTRAR</a>
-    {% endif %}
+
+
+<div class="row">
+    <div class="col-sm">
+
+    </div>
+    <div class="col-6">
+        <h1>Seja Bem Vindo!</h1>
+    </div>
+    <div class="col-sm">
+        {% if user.is_authenticated %}
+            <p>Olá {{ user.username }}</p>
+            <a href="{% url 'logout' %}" class="btn btn-info">SAIR</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-info">ENTRAR</a>
+        {% endif %}
+    </div>
+</div>
+
+
+
 {% endblock %}

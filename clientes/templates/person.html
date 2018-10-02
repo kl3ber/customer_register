@@ -4,7 +4,8 @@
 
 
 {% block main %}
-<a href="{% url 'logout' %}">Sair</a>
+<p>Olá {{ user.username }}</p>
+<a href="{% url 'logout' %}">Sair</a><br><br><br><br>
 <ul>
     {% for person in persons %}
     <li>
@@ -53,7 +54,7 @@ $(".actionButton").click(function() {
         <th>#</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Action</th>
+        <th>Age</th>
       </tr>
     </thead>
     <tbody>
@@ -62,6 +63,7 @@ $(".actionButton").click(function() {
         <td>{{ person.id }}</td>
         <td>{{ person.first_name }}</td>
         <td>{{ person.last_name }}</td>
+        <td>{{ person.age }}</td>
         <td class="dropdown"><a class="btn btn-default actionButton"
           data-toggle="dropdown" href="#"> Action </a></td>
       </tr>
@@ -69,7 +71,7 @@ $(".actionButton").click(function() {
     </tbody>
   </table>
   <ul id="contextMenu" class="dropdown-menu" role="menu">
-    <li><a tabindex="-1" href="#" class="payLink">Pay</a></li>
+    <li><a tabindex="-1" href="#" class="payLink">Atualizar</a></li>
     <li><a tabindex="-1" href="#" class="delLink">Deletar</a></li>
   </ul>
   <!-- Post Info -->
