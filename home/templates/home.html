@@ -2,8 +2,8 @@
 
 {% block title %} Home-Page {% endblock %}
 
-{% block main %}
 
+{% block main %}
 
 <div class="row">
     <div class="col-sm">
@@ -14,14 +14,12 @@
     </div>
     <div class="col-sm">
         {% if user.is_authenticated %}
-            <p>Olá {{ user.username }}</p>
-            <a href="{% url 'logout' %}" class="btn btn-info">SAIR</a>
+            <p>Olá, {{ user.username }} <a href="{% url 'logout' %}" class="btn btn-info">SAIR</a></p>
+            <a href="{% url 'person_list' %}" class="btn btn-info">Ver lista de clientes</a>
         {% else %}
             <a href="{% url 'login' %}" class="btn btn-info">ENTRAR</a>
         {% endif %}
     </div>
 </div>
-
-
 
 {% endblock %}
