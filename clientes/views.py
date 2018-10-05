@@ -1,6 +1,7 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from .models import Person
 from .forms import PersonForm
 
@@ -9,13 +10,22 @@ from .forms import PersonForm
 
 @login_required
 def person_list(request):
-    termo_pesquisa = request.GET.get('pesquisa', None)
+    nome = request.GET.get('pesquisa_nome', None)
+    sobrenome = request.GET.get('pesquisa_sobrenome', None)
+    checkbox = request.GET.get('meu-checkbox', None)
 
-    if termo_pesquisa:
-        persons = Person.objects.all()
-        persons = persons.filter(first_name=termo_pesquisa)
-    else:
-        persons = Person.objects.all()
+    # if nome or sobrenome:
+    #     persons = Person.objects.filter(first_name__icontains=nome | last_name__icontains=sobrenome)
+    # else:
+    #     persons = Person.objects.all()
+
+    persons = Person.objects.all()
+
+    if checkbox == 'on':
+        persons = persons.filter(doc__isnull=True)
+
+    if nome:        persons = persons.filter(Q(first_name__icontains=nome))
+    if sobrenome:   persons = persons.filter(Q(last_name__icontains=sobrenome))
 
     return render(request, 'person.html', {'persons': persons})
 
@@ -23,7 +33,6 @@ def person_list(request):
 @login_required
 def person_new(request):
     form = PersonForm(request.POST or None, request.FILES or None)
-    print(form)
 
     if form.is_valid():
         form.save()

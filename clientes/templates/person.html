@@ -9,10 +9,6 @@
     <div class="col"></div>
     <div class="col-6">
         <h3>Lista de Clientes</h3>
-        <form action="">
-            <input type="text" name="pesquisa">
-            <button>Pesquisar</button>
-        </form>
 
         <ul class="list-group">
             {% for person in persons %}
@@ -42,9 +38,13 @@
         <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="">
     </div>
     <div class="form-group mx-sm-3 mb-2">
-        <input type="text" class="form-control" id="pesquisa" name="pesquisa" placeholder="Digito o nome da pessoa">
+        <label><input type="checkbox" name="meu-checkbox" placeholder="Sem CPF">Sem CPF </label>
+        <input type="text" class="form-control" id="pesquisa_nome" name="pesquisa_nome" placeholder="Digito o nome da pessoa">
+        <input type="text" class="form-control" id="pesquisa_sobrenome" name="pesquisa_sobrenome" placeholder="Digito o nome sobrenome">
+
     </div>
     <button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
+    <a href="{% url 'person_list' %}" class="btn btn-primary mb-2">Limpar</a>
 </form>
 
 
