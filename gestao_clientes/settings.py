@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import sqlserver_ado
 from decouple import config
 from dj_database_url import parse as dburl
 
@@ -89,6 +90,15 @@ default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
 DATABASES = {
     'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
+    'mssql': {
+        'NAME': 'CODIGOS',
+        'ENGINE': 'sql_server.pyodbc',
+        'HOST': 'plan01spo15',
+        # 'USER': 'planejamento',
+        # 'PASSWORD': 'pl@n1234',
+        # 'DSN': 'fontedjango',
+        'OPTIONS': {'driver': 'SQL Server Native Client 10.0', }
+    }
 }
 
 
@@ -143,3 +153,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     'static',
 ]
+
+DATABASE_ROUTERS = ['gestao_clientes.db_router.DatabaseRouter']
