@@ -2,9 +2,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from .models import Person
+from .models import Person, Py_Log_mssql
 from .forms import PersonForm
-
+from datetime import date as dt
 
 # Create your views here.
 
@@ -13,11 +13,6 @@ def person_list(request):
     nome = request.GET.get('pesquisa_nome', None)
     sobrenome = request.GET.get('pesquisa_sobrenome', None)
     checkbox = request.GET.get('meu-checkbox', None)
-
-    # if nome or sobrenome:
-    #     persons = Person.objects.filter(first_name__icontains=nome | last_name__icontains=sobrenome)
-    # else:
-    #     persons = Person.objects.all()
 
     persons = Person.objects.all()
 
@@ -62,3 +57,10 @@ def person_delete(request, id):
         return redirect('person_list')
 
     return render(request, 'person_delete_confirm.html', {'person': person})
+
+
+def dw_log_atualizacao(request):
+    logs = Py_Log_mssql.objects.filter(pylog_datetime__date=dt.today()).order_by('-pylog_datetime')
+    n = logs.count()
+
+    return render(request, 'logs.html', {'logs': logs, 'n': n})

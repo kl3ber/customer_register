@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %} Lista de Pessoas{% endblock %}
+
+{% block main %}
+
+
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<meta name="viewport"-->
+          <!--content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+    <!--<meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+    <!--<title>Document</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<ul class="list-group">-->
+    <!--{% for log in logs %}-->
+    <!--<li class="list-group-item">-->
+        <!--<a>{{ log }}</a>-->
+    <!--</li>-->
+    <!--{% endfor %}-->
+<!--</ul>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<!--<script type='text/javascript' src='http://code.jquery.com/jquery-2.0.2.js'></script>-->
+<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+</head>
+
+<table id="myTable" class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Data/Hora</th>
+        <th>Descrição</th>
+        <th>ID Etapa</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <p><b>Total de Registros: </b>{{ n }}</p>
+
+    <br>
+
+    {% for log in logs %}
+      <tr>
+        <td>{{ log.pylog_id }}</td>
+        <td>{{ log.pylog_datetime|date:"Y-m-d H:i:s" }}</td>
+        <td>{{ log.pylog_desc }}</td>
+        <td>{{ log.pylog_etapa_id }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+</body>
+</html>
+
+
+{% endblock %}
